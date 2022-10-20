@@ -128,25 +128,15 @@ appUtil.database_check().then((db_init_ok) => {
     logger.endAndExitProcess();
   }
 
-  // Start HTTPS server
-  let privateKey;
-  let certificate;
-  try {
-    privateKey = fs.readFileSync('./ssl_key/private.pem', 'utf8');
-    certificate = fs.readFileSync('./ssl_key/file.crt', 'utf8');
-  } catch (err) {
-    logger.error('The private key or certificate for HTTPS server is missing.');
-    logger.endAndExitProcess();
-  }
-  const credentials = { key: privateKey, cert: certificate };
-  const httpsServer = https.createServer(credentials, app);
+  // Start HTTP server
+  const httpsServer = http.createServer(app);
   httpsServer.listen(
-    Config.get('HTTPS_PORT'),
+    Config.get('HTTP_PORT'),
     Config.get('hosts'),
     function () {
       logger.info(
-        'HTTPS Server is running on: https://localhost:' +
-          Config.get('HTTPS_PORT')
+        'HTTP Server is running on: http://localhost:' +
+          Config.get('HTTP_PORT')
       );
       app.emit('app_started'); // test app need to wait on this event
     }
