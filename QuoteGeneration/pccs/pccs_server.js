@@ -38,7 +38,7 @@ import node_schedule from 'node-schedule';
 import body_parser from 'body-parser';
 import { sgxRouter, tdxRouter } from './routes/index.js';
 import * as fs from 'fs';
-import * as https from 'https';
+import * as http from 'http';
 import * as auth from './middleware/auth.js';
 import * as error from './middleware/error.js';
 import addRequestId from './middleware/addRequestId.js';
