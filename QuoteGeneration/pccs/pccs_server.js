@@ -129,8 +129,8 @@ appUtil.database_check().then((db_init_ok) => {
   }
 
   // Start HTTP server
-  const httpsServer = http.createServer(app);
-  httpsServer.listen(
+  const httpServer = http.createServer(app);
+  httpServer.listen(
     Config.get('HTTP_PORT'),
     Config.get('hosts'),
     function () {
